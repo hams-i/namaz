@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "title": "Namaz",
+    "description": "Namaz vakitleri, dualar, sureler ve zikirmatik."
+  },
+  "app": {
+    "name": "Namaz"
+  },
+  "nav": {
+    "vakitler": "Vakitler",
+    "dualarSureler": "Dualar&Sureler",
+    "zikirmatik": "Zikirmatik",
+    "ayarlar": "Ayarlar"
+  },
+  "prayers": {
+    "fajr": "Sabah",
+    "dhuhr": "Öğle",
+    "asr": "İkindi",
+    "maghrib": "Akşam",
+    "isha": "Yatsı"
+  },
+  "sections": {
+    "firstSunnah": "İlk Sünnet {count}",
+    "sunnah": "Sünnet {count}",
+    "fard": "Farz {count}",
+    "lastSunnah": "Son Sünnet {count}",
+    "witr": "Vitir Vacip {count}"
+  },
+  "flow": {
+    "subhaneke": "Sübhaneke",
+    "euzu": "Eûzü",
+    "besmele": "Besmele",
+    "fatiha": "Fâtiha",
+    "aSurah": "Bir sûre",
+    "ruku": "Rükû",
+    "twoSajda": "2 secde",
+    "sitting": "Oturuş",
+    "finalSitting": "Son oturuş",
+    "ettehiyyatu": "Ettehiyyâtü",
+    "salli": "Salli",
+    "barik": "Bârik",
+    "rabbena": "Rabbenâ",
+    "kunut": "Kunut",
+    "tekbir": "Tekbir"
+  },
+  "vakitler": {
+    "title": "Vakitler",
+    "niyet": "Niyet",
+    "steps": "Rekât Adımları",
+    "detail": "Detay",
+    "tekbirPronunciation": "Allâhü ekber.",
+    "repeatThree": "3x {text}",
+    "rakat": "{count}. Rekât",
+    "timeRemaining": "Vaktin çıkmasına",
+    "nextPrayer": "Sıradaki vakte",
+    "minutesRemaining": "{count} dk",
+    "timeLocation": "İstanbul için yaklaşık hesaplama",
+    "timeCity": "İstanbul",
+    "surahOrderTitle": "Namaz Sûrelerinin Kur'an'daki Sıralama Düzeni",
+    "surahOrderIntro": "Namazda zamm-ı sûre okunurken Kur'an-ı Kerim'deki sıraya (baştan sona veya yukarıdan aşağıya doğru) uyulması sünnettir. Namazda en çok okunan kısa sûrelerin sıralaması şöyledir:",
+    "importantNote": "Önemli Not",
+    "reminder": "Hatırlatma",
+    "surahSuggestions": "Sûre Önerileri",
+    "notes": {
+      "fardFour": "Dört rekâtlı farzlarda 3. ve 4. rekâtlarda zamm-ı sûre okunmaz; yalnızca Fâtiha okunur.",
+      "fardThree": "Üç rekâtlı farz namazda 3. rekâtta zamm-ı sûre okunmaz; yalnızca Fâtiha okunur.",
+      "fardTwo": "Sabah namazının farzında her iki rekâtta da Fâtiha'dan sonra zamm-ı sûre okunur.",
+      "lastSunnah": "Son sünnet, normal iki rekât sünnet gibi kılınır.",
+      "sunnahFour": "Dört rekâtlı sünnette 3. ve 4. rekâtlarda da Fâtiha'dan sonra zamm-ı sûre okunur.",
+      "witr": "Vitir 3 rekâttır ve vaciptir. 3. rekâtta Fâtiha ve zamm-ı sûreden sonra eller kaldırılarak tekbir alınır, Kunut duası okunur."
+    }
+  },
+  "library": {
+    "title": "Dualar & Sureler",
+    "duas": "Dualar",
+    "surahs": "Sureler",
+    "search": "Ara...",
+    "hint": "İçeriği görmek için dua veya sûreye dokunun.",
+    "empty": "Sonuç bulunamadı.",
+    "arabic": "Arapça",
+    "pronunciation": "Okunuş",
+    "meaning": "Türkçe Anlamı",
+    "back": "Geri"
+  },
+  "zikirmatik": {
+    "title": "Zikirmatik",
+    "tabCounter": "Zikirmatik",
+    "tabRecords": "Kayıtlar",
+    "presets": "Hazır Zikirler",
+    "custom": "Custom",
+    "customNote": "Custom Not",
+    "customPlaceholder": "Kendi zikrini yaz",
+    "minus": "Azalt",
+    "plus": "Artır",
+    "reset": "Sıfırla",
+    "autoSaveHint": "Her zikrin sayacı cihazınıza anlık olarak kaydedilir.",
+    "save": "Kaydet",
+    "saveHint": "Kaydet basınca seçilen zikir, adet ve tarih kaydedilir.",
+    "saved": "Zikir kaydedildi.",
+    "saveError": "Kaydetmek için adet 0'dan büyük olmalıdır.",
+    "customRequired": "Custom için bir not yazın.",
+    "count": "Adet: {count}",
+    "totalRecords": "Toplam Kayıt",
+    "recordCount": "{count} kayıt",
+    "thisMonth": "Bu ay {count} kayıt",
+    "filters": {
+      "all": "Tümü",
+      "today": "Bugün",
+      "week": "Bu Hafta",
+      "month": "Bu Ay"
+    },
+    "emptyRecords": "Henüz kayıt yok.",
+    "emptyRecordsHint": "Zikirmatikten kaydettiğiniz sayımlar burada görünür.",
+    "delete": "Sil",
+    "deleteTitle": "Kaydı sil",
+    "deleteDescription": "Bu zikir kaydı kalıcı olarak silinecek.",
+    "cancel": "Vazgeç",
+    "deleted": "Kayıt silindi."
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "location": "Konum seç",
+    "locationHint": "Namaz vakitlerini seçtiğiniz ile göre hesaplar. Varsayılan Antalya'dır.",
+    "language": "Dil",
+    "languageHint": "Uygulama dili",
+    "theme": "Tema",
+    "themeHint": "Görünüm",
+    "themeSystem": "Sistem",
+    "themeLight": "Açık",
+    "themeDark": "Koyu",
+    "showArabic": "Arapçayı göster",
+    "showArabicHint": "Dua ve sûrelerin Arapça metnini gösterir.",
+    "turkish": "Türkçe",
+    "english": "English",
+    "installTitle": "Uygulamayı yükle",
+    "installHint": "Namaz’ı ana ekrana ekleyerek uygulama gibi kullanın.",
+    "installButton": "Yükle",
+    "installIos": "Paylaş düğmesine dokunun, ardından “Ana Ekrana Ekle”yi seçin.",
+    "installBrowser": "Tarayıcınızın menüsünden “Uygulamayı yükle” veya “Ana ekrana ekle” seçeneğini kullanın."
+  },
+  "notFound": {
+    "title": "Sayfa bulunamadı",
+    "description": "Aradığınız sayfa yok.",
+    "home": "Vakitlere dön"
+  }
+}

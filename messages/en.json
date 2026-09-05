@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "title": "Namaz",
+    "description": "Prayer times, duas, surahs, and a dhikr counter."
+  },
+  "app": {
+    "name": "Namaz"
+  },
+  "nav": {
+    "vakitler": "Times",
+    "dualarSureler": "Duas & Surahs",
+    "zikirmatik": "Dhikr",
+    "ayarlar": "Settings"
+  },
+  "prayers": {
+    "fajr": "Fajr",
+    "dhuhr": "Dhuhr",
+    "asr": "Asr",
+    "maghrib": "Maghrib",
+    "isha": "Isha"
+  },
+  "sections": {
+    "firstSunnah": "First Sunnah {count}",
+    "sunnah": "Sunnah {count}",
+    "fard": "Fard {count}",
+    "lastSunnah": "Last Sunnah {count}",
+    "witr": "Witr Wajib {count}"
+  },
+  "flow": {
+    "subhaneke": "Subhanaka",
+    "euzu": "A'udhu",
+    "besmele": "Basmala",
+    "fatiha": "Al-Fatiha",
+    "aSurah": "A surah",
+    "ruku": "Ruku",
+    "twoSajda": "2 sajdah",
+    "sitting": "Sitting",
+    "finalSitting": "Final sitting",
+    "ettehiyyatu": "At-Tahiyyat",
+    "salli": "Salawat",
+    "barik": "Barik",
+    "rabbena": "Rabbana",
+    "kunut": "Qunut",
+    "tekbir": "Takbir"
+  },
+  "vakitler": {
+    "title": "Times",
+    "niyet": "Intention",
+    "steps": "Rak'ah Steps",
+    "detail": "Details",
+    "tekbirPronunciation": "Allahu akbar.",
+    "repeatThree": "3x {text}",
+    "rakat": "Rak'ah {count}",
+    "timeRemaining": "Time remaining",
+    "nextPrayer": "Until next prayer",
+    "minutesRemaining": "{count} min",
+    "timeLocation": "Approximate calculation for Istanbul",
+    "timeCity": "Istanbul",
+    "surahOrderTitle": "Quranic Order of Surahs in Prayer",
+    "surahOrderIntro": "When reciting a surah after Al-Fatiha, following the order of the Quran (from beginning to end) is sunnah. The short surahs most often recited in prayer are ordered as follows:",
+    "importantNote": "Important Note",
+    "reminder": "Reminder",
+    "surahSuggestions": "Suggested Surahs",
+    "notes": {
+      "fardFour": "In four-rak'ah fard prayers, a surah is not recited after Al-Fatiha in the 3rd and 4th rak'ahs.",
+      "fardThree": "In the three-rak'ah fard prayer, a surah is not recited after Al-Fatiha in the 3rd rak'ah.",
+      "fardTwo": "In the fard of Fajr, a surah is recited after Al-Fatiha in both rak'ahs.",
+      "lastSunnah": "The last sunnah is prayed like a regular two-rak'ah sunnah.",
+      "sunnahFour": "In a four-rak'ah sunnah, a surah is also recited after Al-Fatiha in the 3rd and 4th rak'ahs.",
+      "witr": "Witr is three rak'ahs and is wajib. In the 3rd rak'ah, after Al-Fatiha and a surah, the hands are raised with takbir and the Qunut dua is recited."
+    }
+  },
+  "library": {
+    "title": "Duas & Surahs",
+    "duas": "Duas",
+    "surahs": "Surahs",
+    "search": "Search...",
+    "hint": "Tap a dua or surah to reveal its content.",
+    "empty": "No results found.",
+    "arabic": "Arabic",
+    "pronunciation": "Pronunciation",
+    "meaning": "Meaning",
+    "back": "Back"
+  },
+  "zikirmatik": {
+    "title": "Dhikr Counter",
+    "tabCounter": "Counter",
+    "tabRecords": "Records",
+    "presets": "Ready Dhikr",
+    "custom": "Custom",
+    "customNote": "Custom Note",
+    "customPlaceholder": "Write your own dhikr",
+    "minus": "Decrease",
+    "plus": "Increase",
+    "reset": "Reset",
+    "autoSaveHint": "Each dhikr count is saved to your device instantly.",
+    "save": "Save",
+    "saveHint": "Save stores the selected dhikr, count, and date.",
+    "saved": "Dhikr saved.",
+    "saveError": "Count must be greater than 0 to save.",
+    "customRequired": "Write a note for a custom dhikr.",
+    "count": "Count: {count}",
+    "totalRecords": "Total Records",
+    "recordCount": "{count} records",
+    "thisMonth": "{count} this month",
+    "filters": {
+      "all": "All",
+      "today": "Today",
+      "week": "This Week",
+      "month": "This Month"
+    },
+    "emptyRecords": "No records yet.",
+    "emptyRecordsHint": "Counts you save from the counter appear here.",
+    "delete": "Delete",
+    "deleteTitle": "Delete record",
+    "deleteDescription": "This dhikr record will be permanently deleted.",
+    "cancel": "Cancel",
+    "deleted": "Record deleted."
+  },
+  "settings": {
+    "title": "Settings",
+    "location": "Choose location",
+    "locationHint": "Calculates prayer times for the selected province. Antalya is the default.",
+    "language": "Language",
+    "languageHint": "App language",
+    "theme": "Theme",
+    "themeHint": "Appearance",
+    "themeSystem": "System",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "showArabic": "Show Arabic",
+    "showArabicHint": "Shows the Arabic text of duas and surahs.",
+    "turkish": "Türkçe",
+    "english": "English",
+    "installTitle": "Install the app",
+    "installHint": "Add Namaz to your home screen to use it like an app.",
+    "installButton": "Install",
+    "installIos": "Tap the Share button, then choose “Add to Home Screen”.",
+    "installBrowser": "Use “Install app” or “Add to Home Screen” in your browser menu."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist.",
+    "home": "Back to Times"
+  }
+}
