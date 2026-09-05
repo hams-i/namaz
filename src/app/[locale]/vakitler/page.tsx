@@ -1,3 +1,7 @@
+"use client";
+
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { VakitlerView } from "@/features/vakitler/presentation/vakitler-view";
 import {
   PRAYER_GUIDES,
@@ -10,14 +14,10 @@ function isPrayerId(value: string): value is PrayerId {
   return (PRAYER_ORDER as readonly string[]).includes(value);
 }
 
-export default async function VakitlerPage({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-}) {
-  const query = await searchParams;
-  const vakitRaw = Array.isArray(query.vakit) ? query.vakit[0] : query.vakit;
-  const bolumRaw = Array.isArray(query.bolum) ? query.bolum[0] : query.bolum;
+function VakitlerPageContent() {
+  const searchParams = useSearchParams();
+  const vakitRaw = searchParams.get("vakit");
+  const bolumRaw = searchParams.get("bolum");
   const prayerId = vakitRaw && isPrayerId(vakitRaw) ? vakitRaw : "dhuhr";
   const guide = getPrayerGuide(prayerId) ?? PRAYER_GUIDES[1];
   const sectionId =
@@ -26,4 +26,12 @@ export default async function VakitlerPage({
       : guide.sections[0].id;
 
   return <VakitlerView prayerId={prayerId} sectionId={sectionId} />;
+}
+
+export default function VakitlerPage() {
+  return (
+    <Suspense>
+      <VakitlerPageContent />
+    </Suspense>
+  );
 }

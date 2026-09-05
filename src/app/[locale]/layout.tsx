@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { Geist, Geist_Mono, Noto_Naskh_Arabic } from "next/font/google";
 import { hasLocale } from "next-intl";
 import { NextIntlClientProvider } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { AppShell } from "@/shared/components/app-shell";
@@ -88,6 +88,7 @@ export default async function LocaleLayout({
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
+  setRequestLocale(locale);
 
   return (
     <html
