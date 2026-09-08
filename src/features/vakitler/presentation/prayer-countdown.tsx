@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { CalculationMethod, Coordinates, Madhab, PrayerTimes } from "adhan";
+import { CalculationMethod, Coordinates, Prayer, PrayerTimes } from "adhan";
 import { useTranslations } from "next-intl";
 import {
   getPreferencesSnapshot,
@@ -12,23 +12,48 @@ import { getProvince } from "@/features/settings/data/turkey-provinces";
 
 function prayerTimes(date: Date, coordinates: Coordinates) {
   const parameters = CalculationMethod.Turkey();
-  parameters.madhab = Madhab.Hanafi;
   return new PrayerTimes(coordinates, date, parameters);
 }
 
+function dateInTurkey(now: Date) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Europe/Istanbul",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  }).formatToParts(now);
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return new Date(
+    Number(values.year),
+    Number(values.month) - 1,
+    Number(values.day),
+    12,
+  );
+}
+
 function nextBoundary(now: Date, coordinates: Coordinates) {
-  const today = prayerTimes(now, coordinates);
-  const tomorrowDate = new Date(now);
+  const calendarDate = dateInTurkey(now);
+  const today = prayerTimes(calendarDate, coordinates);
+  const tomorrowDate = new Date(calendarDate);
   tomorrowDate.setDate(tomorrowDate.getDate() + 1);
   const tomorrow = prayerTimes(tomorrowDate, coordinates);
+  const currentPrayer = today.currentPrayer(now);
+  const nextPrayer = today.nextPrayer(now);
 
-  if (now < today.fajr) return { time: today.fajr, waiting: false };
-  if (now < today.sunrise) return { time: today.sunrise, waiting: false };
-  if (now < today.dhuhr) return { time: today.dhuhr, waiting: true };
-  if (now < today.asr) return { time: today.asr, waiting: false };
-  if (now < today.maghrib) return { time: today.maghrib, waiting: false };
-  if (now < today.isha) return { time: today.isha, waiting: false };
-  return { time: tomorrow.fajr, waiting: false };
+  if (currentPrayer === Prayer.Isha || nextPrayer === Prayer.None) {
+    return { time: tomorrow.fajr, waiting: false };
+  }
+
+  const time = today.timeForPrayer(nextPrayer);
+  if (!time) {
+    return { time: tomorrow.fajr, waiting: false };
+  }
+
+  return {
+    time,
+    waiting:
+      currentPrayer === Prayer.None || currentPrayer === Prayer.Sunrise,
+  };
 }
 
 export function PrayerCountdown() {

@@ -1,8 +1,9 @@
 import { DUAS } from "@/features/dualar-sureler/data/duas";
 import { SURAHS } from "@/features/dualar-sureler/data/surahs";
+import { TASBIHS } from "@/features/dualar-sureler/data/tasbihs";
 import type { SacredCategory, SacredText } from "@/features/dualar-sureler/domain/types";
 
-export const SACRED_TEXTS: SacredText[] = [...DUAS, ...SURAHS];
+export const SACRED_TEXTS: SacredText[] = [...DUAS, ...SURAHS, ...TASBIHS];
 
 export function getSacredText(slug: string): SacredText | undefined {
   return SACRED_TEXTS.find((item) => item.slug === slug);
@@ -32,6 +33,8 @@ const SURAH_ORDER = [
   "nas",
 ];
 
+const TASBIH_ORDER = TASBIHS.map((item) => item.slug);
+
 function sortByPreferredOrder(items: SacredText[], order: string[]) {
   return [...items].sort((a, b) => {
     const ai = order.indexOf(a.slug);
@@ -47,7 +50,10 @@ export function getSacredTextsByCategory(category: SacredCategory): SacredText[]
   if (category === "dua") {
     return sortByPreferredOrder(items, DUA_ORDER);
   }
-  return sortByPreferredOrder(items, SURAH_ORDER);
+  if (category === "surah") {
+    return sortByPreferredOrder(items, SURAH_ORDER);
+  }
+  return sortByPreferredOrder(items, TASBIH_ORDER);
 }
 
 export function searchSacredTexts(

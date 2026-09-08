@@ -1,12 +1,14 @@
 const STORAGE_KEY = "namaz.preferences";
 const DEFAULT_PREFERENCES: AppPreferences = {
   showArabic: true,
+  showPrayerDetails: false,
   provinceCode: "07",
 };
 const listeners = new Set<() => void>();
 
 export type AppPreferences = {
   showArabic: boolean;
+  showPrayerDetails: boolean;
   provinceCode: string;
 };
 
@@ -27,6 +29,10 @@ function parsePreferences(raw: string | null): AppPreferences {
         typeof value.showArabic === "boolean"
           ? value.showArabic
           : DEFAULT_PREFERENCES.showArabic,
+      showPrayerDetails:
+        typeof value.showPrayerDetails === "boolean"
+          ? value.showPrayerDetails
+          : DEFAULT_PREFERENCES.showPrayerDetails,
       provinceCode:
         value.locationMode !== "device" && typeof value.provinceCode === "string"
           ? value.provinceCode

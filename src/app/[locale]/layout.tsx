@@ -41,10 +41,51 @@ export async function generateMetadata({
     notFound();
   }
   const t = await getTranslations({ locale, namespace: "meta" });
+  const canonical =
+    locale === "tr"
+      ? "https://namaz.istanbul.black/"
+      : "https://namaz.istanbul.black/en/";
+  const keywords =
+    locale === "tr"
+      ? [
+          "namaz",
+          "namaz vakitleri",
+          "namaz duaları",
+          "sureler",
+          "tesbihler",
+          "zikirmatik",
+          "rekât rehberi",
+        ]
+      : [
+          "prayer",
+          "prayer times",
+          "duas",
+          "surahs",
+          "tasbih",
+          "dhikr counter",
+          "rak'ah guide",
+        ];
   return {
+    metadataBase: new URL("https://namaz.istanbul.black"),
     title: t("title"),
     description: t("description"),
+    keywords,
     applicationName: t("title"),
+    alternates: {
+      canonical,
+      languages: {
+        tr: "https://namaz.istanbul.black/",
+        en: "https://namaz.istanbul.black/en/",
+      },
+    },
+    openGraph: {
+      type: "website" as const,
+      url: canonical,
+      siteName: t("title"),
+      title: t("title"),
+      description: t("description"),
+      locale: locale === "tr" ? "tr_TR" : "en_US",
+    },
     appleWebApp: {
       capable: true,
       title: t("title"),

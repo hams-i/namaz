@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useSyncExternalStore } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/shared/components/app-link";
 import {
@@ -25,6 +25,12 @@ import { buttonVariants } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
+import {
+  getPreferencesSnapshot,
+  getServerPreferencesSnapshot,
+  savePreferences,
+  subscribePreferences,
+} from "@/features/settings/data/preferences-storage";
 
 const FLOW_DETAIL_SLUGS: Partial<Record<FlowKey, string>> = {
   subhaneke: "subhaneke",
@@ -263,7 +269,11 @@ export function VakitlerView({
   const tPrayers = useTranslations("prayers");
   const tSections = useTranslations("sections");
   const locale = useLocale();
-  const [showDetails, setShowDetails] = useState(false);
+  const preferences = useSyncExternalStore(
+    subscribePreferences,
+    getPreferencesSnapshot,
+    getServerPreferencesSnapshot,
+  );
   const guide = getPrayerGuide(prayerId) ?? PRAYER_GUIDES[1];
   const activeSection =
     guide.sections.find((section) => section.id === sectionId) ??
@@ -330,14 +340,19 @@ export function VakitlerView({
               </Label>
               <Switch
                 id="rakat-details"
-                checked={showDetails}
-                onCheckedChange={setShowDetails}
+                checked={preferences.showPrayerDetails}
+                onCheckedChange={(showPrayerDetails) =>
+                  savePreferences({ ...preferences, showPrayerDetails })
+                }
                 aria-label={t("detail")}
               />
             </div>
           )}
         >
-          <StepsList section={activeSection} detailed={showDetails} />
+          <StepsList
+            section={activeSection}
+            detailed={preferences.showPrayerDetails}
+          />
         </InfoCard>
         <NoteCards notes={activeSection.notes} delayBase={180} />
       </div>

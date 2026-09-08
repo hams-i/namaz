@@ -7,8 +7,9 @@ import { LibraryView } from "@/features/dualar-sureler/presentation/library-view
 
 function LibraryPageContent() {
   const searchParams = useSearchParams();
+  const tab = searchParams.get("tab");
   const initialTab: SacredCategory =
-    searchParams.get("tab") === "surah" ? "surah" : "dua";
+    tab === "surah" || tab === "tesbih" ? tab : "dua";
   return <LibraryView initialTab={initialTab} />;
 }
 

@@ -1,4 +1,4 @@
-export type SacredCategory = "dua" | "surah";
+export type SacredCategory = "dua" | "surah" | "tesbih";
 
 export type SacredText = {
   slug: string;

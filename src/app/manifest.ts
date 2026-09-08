@@ -7,7 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     id: "/",
     name: "Namaz",
     short_name: "Namaz",
-    description: "Namaz vakitleri, dualar, sureler ve zikirmatik.",
+    description:
+      "Namaz vakitleri, rekât rehberi, dualar, sureler, tesbihler ve zikirmatik.",
     start_url: "/",
     scope: "/",
     display: "standalone",
@@ -16,6 +17,7 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#ffffff",
     lang: "tr",
     dir: "ltr",
+    categories: ["lifestyle", "education", "utilities"],
     icons: [
       {
         src: "/icon-192.png",

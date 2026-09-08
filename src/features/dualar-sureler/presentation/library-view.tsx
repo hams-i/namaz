@@ -19,13 +19,13 @@ import {
 function TextList({
   items,
   locale,
-  expandedSlug,
+  expandedSlugs,
   onToggle,
   showArabic,
 }: {
   items: SacredText[];
   locale: "tr" | "en";
-  expandedSlug: string | null;
+  expandedSlugs: ReadonlySet<string>;
   onToggle: (slug: string) => void;
   showArabic: boolean;
 }) {
@@ -36,63 +36,69 @@ function TextList({
 
   return (
     <ul className="mt-4 space-y-2">
-      {items.map((item) => (
-        <li
-          key={item.slug}
-          className="overflow-hidden rounded-xl border border-border bg-card"
-        >
-          <button
-            type="button"
-            aria-expanded={expandedSlug === item.slug}
-            aria-controls={`sacred-text-${item.slug}`}
-            onClick={() => onToggle(item.slug)}
-            className="flex min-h-12 w-full items-center gap-3 px-4 py-3 text-left touch-manipulation hover:bg-muted/60"
+      {items.map((item) => {
+        const expanded = expandedSlugs.has(item.slug);
+        return (
+          <li
+            key={item.slug}
+            className="overflow-hidden rounded-xl border border-border bg-card"
           >
-            <span className="flex-1 font-medium">
-              {pickLocale(item.title, locale)}
-            </span>
-            <span className="text-xl leading-none text-muted-foreground" aria-hidden>
-              {expandedSlug === item.slug ? "−" : "+"}
-            </span>
-          </button>
-          {expandedSlug === item.slug ? (
-            <div
-              id={`sacred-text-${item.slug}`}
-              className="space-y-5 border-t border-border px-4 py-5"
+            <button
+              type="button"
+              aria-expanded={expanded}
+              aria-controls={`sacred-text-${item.slug}`}
+              onClick={() => onToggle(item.slug)}
+              className="flex min-h-12 w-full items-center gap-3 px-4 py-3 text-left touch-manipulation hover:bg-muted/60"
             >
-              {showArabic ? (
+              <span className="flex-1 font-medium">
+                {pickLocale(item.title, locale)}
+              </span>
+              <span
+                className="text-xl leading-none text-muted-foreground"
+                aria-hidden
+              >
+                {expanded ? "−" : "+"}
+              </span>
+            </button>
+            {expanded ? (
+              <div
+                id={`sacred-text-${item.slug}`}
+                className="space-y-5 border-t border-border px-4 py-5"
+              >
+                {showArabic ? (
+                  <section>
+                    <h3 className="mb-2 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+                      {t("arabic")}
+                    </h3>
+                    <p
+                      dir="rtl"
+                      className="whitespace-pre-line font-arabic text-2xl leading-[2.1]"
+                    >
+                      {item.arabic}
+                    </p>
+                  </section>
+                ) : null}
                 <section>
                   <h3 className="mb-2 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-                    {t("arabic")}
+                    {t("pronunciation")}
                   </h3>
-                  <p
-                    dir="rtl"
-                    className="whitespace-pre-line font-arabic text-2xl leading-[2.1]"
-                  >
-                    {item.arabic}
+                  <p className="whitespace-pre-line leading-7">
+                    {pickLocale(item.transliteration, locale)}
                   </p>
                 </section>
-              ) : null}
-              <section>
-                <h3 className="mb-2 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-                  {t("pronunciation")}
-                </h3>
-                <p className="whitespace-pre-line leading-7">
-                  {pickLocale(item.transliteration, locale)}
-                </p>
-              </section>
-              <section>
-                <h3 className="mb-2 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-                  {t("meaning")}
-                </h3>
-                <p className="whitespace-pre-line leading-7">
-                  {pickLocale(item.meaning, locale)}
-                </p>
-              </section>
-            </div>
-          ) : null}
-        </li>
-      ))}
+                <section>
+                  <h3 className="mb-2 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+                    {t("meaning")}
+                  </h3>
+                  <p className="whitespace-pre-line leading-7">
+                    {pickLocale(item.meaning, locale)}
+                  </p>
+                </section>
+              </div>
+            ) : null}
+          </li>
+        );
+      })}
     </ul>
   );
 }
@@ -103,7 +109,9 @@ export function LibraryView({ initialTab }: { initialTab: SacredCategory }) {
   const locale = useLocale() === "en" ? "en" : "tr";
   const [tab, setTab] = useState<SacredCategory>(initialTab);
   const [query, setQuery] = useState("");
-  const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
+  const [expandedSlugs, setExpandedSlugs] = useState<Set<string>>(
+    () => new Set(),
+  );
   const preferences = useSyncExternalStore(
     subscribePreferences,
     getPreferencesSnapshot,
@@ -117,14 +125,25 @@ export function LibraryView({ initialTab }: { initialTab: SacredCategory }) {
   function selectTab(nextTab: SacredCategory) {
     setTab(nextTab);
     setQuery("");
-    setExpandedSlug(null);
     router.replace(`/dualar-sureler?tab=${nextTab}`, { scroll: false });
+  }
+
+  function toggleExpanded(slug: string) {
+    setExpandedSlugs((current) => {
+      const next = new Set(current);
+      if (next.has(slug)) {
+        next.delete(slug);
+      } else {
+        next.add(slug);
+      }
+      return next;
+    });
   }
 
   return (
     <div className="flex flex-col gap-4 lg:gap-6">
       <PageHeader title={t("title")} className="mb-0" />
-      <div className="grid h-12 grid-cols-2 gap-2 lg:gap-3">
+      <div className="grid h-12 grid-cols-3 gap-2 lg:gap-3">
         <button
           type="button"
           onClick={() => selectTab("dua")}
@@ -149,6 +168,18 @@ export function LibraryView({ initialTab }: { initialTab: SacredCategory }) {
         >
           {t("surahs")}
         </button>
+        <button
+          type="button"
+          onClick={() => selectTab("tesbih")}
+          className={cn(
+            "flex h-12 items-center justify-center gap-1.5 rounded-xl border text-sm font-medium transition-colors",
+            tab === "tesbih"
+              ? "border-primary bg-primary text-primary-foreground"
+              : "border-border text-foreground",
+          )}
+        >
+          {t("tasbihs")}
+        </button>
       </div>
       <div>
         <div>
@@ -165,10 +196,8 @@ export function LibraryView({ initialTab }: { initialTab: SacredCategory }) {
         <TextList
           items={items}
           locale={locale}
-          expandedSlug={expandedSlug}
-          onToggle={(slug) =>
-            setExpandedSlug((current) => (current === slug ? null : slug))
-          }
+          expandedSlugs={expandedSlugs}
+          onToggle={toggleExpanded}
           showArabic={preferences.showArabic}
         />
       </div>

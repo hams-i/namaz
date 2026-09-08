@@ -2,6 +2,18 @@
   "name": "namaz",
   "version": "0.1.0",
   "private": true,
+  "description": "Namaz vakitleri, rekât rehberi, dualar, sureler, tesbihler ve zikirmatik.",
+  "homepage": "https://namaz.istanbul.black/",
+  "keywords": [
+    "namaz",
+    "prayer-times",
+    "dua",
+    "surah",
+    "tesbih",
+    "zikirmatik",
+    "islamic-app",
+    "pwa"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
